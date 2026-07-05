@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Hanken_Grotesk } from "next/font/google";
+import { Fraunces, Hanken_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/sections/Header";
+import NewHeader from "@/components/sections/NewHeader";
 import Footer from "@/components/sections/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -31,12 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt" className={`${fraunces.variable} ${hanken.variable}`}>
+    <html lang="pt" className={cn(fraunces.variable, hanken.variable, "font-sans", geist.variable)}>
       <body>
-        <Header />
-        {children}
-        <Footer />
-        <ScrollToTopButton />
+        <NewHeader />
+          {children}
+          <Footer />
+          <ScrollToTopButton />
       </body>
     </html>
   );
