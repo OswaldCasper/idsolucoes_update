@@ -80,7 +80,7 @@ export default function Navigation() {
         <Link
             href="https://wa.me/244929481473"
             target="_blank"
-            className="flex items-center gap-2 rounded-md bg-green-500 px-3 py-2 text-sm font-medium text-white transition hover:bg-green-600"
+            className="flex items-center gap-2 rounded-md bg-green-500 px-3 py-2 text-sm font-medium text-white transition hover:bg-gold"
         >
             <FaWhatsapp className="h-4 w-4" />
             WhatsApp
