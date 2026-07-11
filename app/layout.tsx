@@ -5,6 +5,7 @@ import NewHeader from "@/components/sections/NewHeader";
 import Footer from "@/components/sections/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -34,12 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt" className={cn(fraunces.variable, hanken.variable, "font-sans", geist.variable)}>
+    <html lang="pt" suppressHydrationWarning className={cn(fraunces.variable, hanken.variable, "font-sans", geist.variable)}>
       <body>
-        <NewHeader />
+        <ThemeProvider>
+          <NewHeader />
           {children}
           <Footer />
           <ScrollToTopButton />
+        </ThemeProvider>
       </body>
     </html>
   );

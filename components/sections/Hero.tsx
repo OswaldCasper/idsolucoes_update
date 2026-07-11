@@ -1,92 +1,251 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+
+const areas = [
+  ["01", "Formação Profissional"],
+  ["02", "Segurança Electrónica"],
+  ["03", "Manpower & Recrutamento"],
+];
 
 export default function Hero() {
   return (
-    <section 
-    id="inicio"
-    className="is-dark relative overflow-hidden bg-black py-24 text-white md:py-28">
-      
-      {/* brilho dourado subtil no canto */}
-      <div className="pointer-events-none absolute -right-56 -top-40 h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(201,154,58,0.10)_0%,transparent_62%)]" />
+    <section
+      id="inicio"
+      className="
+        relative
+        overflow-hidden
+        bg-background
+        py-24
+        text-foreground
+        md:py-32
+      "
+    >
 
-      <div className="relative z-10 mx-auto grid max-w-[1240px] items-center gap-16 px-8 md:grid-cols-[1.2fr_0.8fr]">
-        
-        {/* coluna de texto */}
-        <div>
-          <span className="eyebrow fade-up mb-6">
+      {/* brilho dourado ambiente */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-40
+          -top-40
+          h-[600px]
+          w-[600px]
+          rounded-full
+          bg-[radial-gradient(circle,rgba(201,154,58,0.15)_0%,transparent_65%)]
+        "
+      />
+
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          grid
+          max-w-[1240px]
+          items-center
+          gap-16
+          px-6
+          md:grid-cols-[1.1fr_0.9fr]
+          lg:px-8
+        "
+      >
+
+        {/* TEXTO */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
+        >
+
+          <span
+            className="
+              mb-6
+              inline-flex
+              items-center
+              gap-3
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.3em]
+              text-foreground
+            "
+          >
+            <span className="h-px w-7 bg-primary" />
             Império Dourado Soluções
           </span>
 
-          <h1 className="mb-6 font-display text-[clamp(40px,5.2vw,72px)] font-medium leading-[1.05] tracking-[-0.015em]">
-            <span className="fade-up block" style={{ animationDelay: "0.18s" }}>
+
+          <h1
+            className="
+              mb-6
+              font-sans
+              text-[clamp(40px,5vw,72px)]
+              font-semibold
+              leading-[1.05]
+              tracking-tight
+            "
+          >
+
+            <motion.span
+              className="block"
+              initial={{ opacity:0, x:-20 }}
+              animate={{ opacity:1, x:0 }}
+              transition={{ delay:.2 }}
+            >
               Serviços que capacitam,
-            </span>
+            </motion.span>
 
-            <span className="fade-up block" style={{ animationDelay: "0.3s" }}>
+
+            <motion.span
+              className="block"
+              initial={{ opacity:0, x:-20 }}
+              animate={{ opacity:1, x:0 }}
+              transition={{ delay:.35 }}
+            >
               conectam e
-            </span>
+            </motion.span>
 
-            <span
-              className="fade-up gold-text block"
-              style={{ animationDelay: "0.42s" }}
+
+            <motion.span
+              className="gold-text block"
+              initial={{ opacity:0, x:-20 }}
+              animate={{ opacity:1, x:0 }}
+              transition={{ delay:.5 }}
             >
               desenvolvem.
-            </span>
+            </motion.span>
+
           </h1>
 
-          <p
-            className="fade-up mb-9 max-w-[520px] text-[18px] text-muteddark"
-            style={{ animationDelay: "0.56s" }}
+
+          <motion.p
+            className="
+              mb-9
+              max-w-[520px]
+              text-lg
+              text-muted-foreground
+            "
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{delay:.65}}
           >
-            Empresa angolana de serviços estratégicos. Combinamos tecnologia,
-            equipas qualificadas e uma abordagem centrada nas pessoas para
-            entregar soluções práticas a cada cliente.
-          </p>
+            Empresa angolana de serviços estratégicos.
+            Combinamos tecnologia, equipas qualificadas e uma
+            abordagem centrada nas pessoas para entregar soluções
+            práticas a cada cliente.
+          </motion.p>
 
-          <div
-            className="fade-up flex flex-wrap gap-4"
-            style={{ animationDelay: "0.7s" }}
+
+          <motion.div
+            className="flex flex-wrap gap-4"
+            initial={{opacity:0, y:15}}
+            animate={{opacity:1, y:0}}
+            transition={{delay:.8}}
           >
-            <Link href="#contactos" className="btn btn-fill">
-              Pedir levantamento técnico
-            </Link>
 
-            <Link href="#servicos" className="btn btn-ghost">
-              Ver serviços
-            </Link>
-          </div>
-        </div>
+          <Button asChild size="lg">
+          <Link href="#contactos">
+            Pedir levantamento técnico
+          </Link>
+        </Button>
 
-        {/* cartão lateral */}
-        <div
-          className="fade-in hidden md:block"
-          style={{ animationDelay: "0.55s" }}
+
+        <Button
+          asChild
+          size="lg"
+          variant="outline"
         >
-          <div className="border border-linedark px-8 pb-3 pt-2">
-            
-            <div className="py-4 text-[12px] font-semibold uppercase tracking-[0.2em] text-gold">
-              Áreas principais
-            </div>
+          <Link href="#servicos">
+            Ver serviços
+          </Link>
+        </Button>
 
-            {[
-              ["01", "Formação Profissional"],
-              ["02", "Segurança Electrónica"],
-              ["03", "Manpower & Recrutamento"],
-            ].map(([n, t]) => (
-              <div
-                key={n}
-                className="flex items-center gap-4 border-t border-linedark py-[18px] transition-all hover:pl-[7px] hover:text-goldsoft"
-              >
-                <span className="w-6 font-display text-[14px] text-gold">
-                  {n}
-                </span>
+          </motion.div>
 
-                <span className="text-[15.5px] font-medium">{t}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
+
+
+
+        {/* IMAGEM */}
+        <motion.div
+          initial={{
+            opacity:0,
+            scale:.95,
+            x:40
+          }}
+          animate={{
+            opacity:1,
+            scale:1,
+            x:0
+          }}
+          transition={{
+            duration:.9,
+            delay:.3
+          }}
+          className="
+            relative
+            hidden
+            md:block
+          "
+        >
+
+          <motion.div
+            whileHover={{
+              scale:1.03
+            }}
+            transition={{
+              duration:.4
+            }}
+            className="
+              relative
+              overflow-hidden
+              rounded-2xl
+              border
+              border-border
+              shadow-xl
+            "
+          >
+
+            <Image
+              src="/Image_1.jpg"
+              alt="Império Dourado Soluções"
+              width={700}
+              height={700}
+              className="
+                h-auto
+                w-full
+                object-cover
+              "
+              priority
+            />
+
+
+            {/* overlay dourado */}
+            <div
+              className="
+                pointer-events-none
+                absolute
+                inset-0
+                bg-gradient-to-tr
+                from-gold/20
+                via-transparent
+                to-transparent
+              "
+            />
+
+          </motion.div>
+
+        </motion.div>
+
       </div>
+
     </section>
   );
 }
