@@ -72,7 +72,7 @@ body {
   position: relative;
   font-weight: 500;
   font-size: 14.5px;
-  color: #fff;
+  color: var(--foreground);
   text-decoration: none;
   padding: 6px 0;
   transition: color 0.3s;
@@ -199,6 +199,15 @@ body {
 .is-dark .btn-ghost:hover {
   color: var(--color-goldsoft);
   border-color: rgba(201, 154, 58, 0.5);
+}
+
+.menu-link {
+  @apply rounded-lg px-2.5 py-1.5 text-sm font-medium transition-all;
+}
+
+.menu-link:hover {
+  background: var(--color-gold);
+  color: #000;
 }
 
 html {
