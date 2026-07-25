@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Target, Eye, Gem } from "lucide-react";
 
 const pillars = [
@@ -29,14 +29,14 @@ const pillars = [
   },
 ];
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.15 },
   },
 };
 
-const card = {
+const card: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };

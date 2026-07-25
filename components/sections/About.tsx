@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const whyIds = [
   {
@@ -25,14 +25,14 @@ const whyIds = [
   },
 ];
 
-const listContainer = {
+const listContainer: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.12 },
   },
 };
 
-const listItem = {
+const listItem: Variants = {
   hidden: { opacity: 0, x: -16 },
   show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };

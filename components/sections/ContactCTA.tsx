@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { motion, type Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 
 const contactInfo = [
@@ -22,14 +22,14 @@ const contactInfo = [
   },
 ];
 
-const listContainer = {
+const listContainer: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.12 },
   },
 };
 
-const listItem = {
+const listItem: Variants = {
   hidden: { opacity: 0, x: -16 },
   show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
@@ -42,13 +42,13 @@ export default function ContactCTA() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  setForm({ ...form, [e.target.name]: e.target.value });
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = (e: FormEvent) => {
+  e.preventDefault();
 
     const mailtoLink = `mailto:sales@idsolucoes.ao?subject=Contacto IDS - ${form.name}&body=Nome: ${form.name}%0AEmail: ${form.email}%0A%0A${form.message}`;
 
