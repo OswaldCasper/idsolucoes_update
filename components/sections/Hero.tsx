@@ -19,9 +19,9 @@ export default function Hero() {
         relative
         overflow-hidden
         bg-background
-        py-24
+        py-10
         text-foreground
-        md:py-32
+        md:py-16
       "
     >
 
@@ -71,13 +71,14 @@ export default function Hero() {
               items-center
               gap-3
               text-xs
-              font-semibold
+              font-bold
               uppercase
               tracking-[0.3em]
               text-foreground
+              dark:text-gold
             "
           >
-            <span className="h-px w-7 bg-primary" />
+            <span className="h-px w-7 bg-primary dark:bg-gold" />
             Império Dourado Soluções
           </span>
 
@@ -150,7 +151,7 @@ export default function Hero() {
             transition={{delay:.8}}
           >
 
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="hover:bg-gold dark:hover:bg-gold">
           <Link href="#contactos">
             Pedir levantamento técnico
           </Link>
@@ -161,6 +162,7 @@ export default function Hero() {
           asChild
           size="lg"
           variant="outline"
+          className="border-foreground hover:border-gold hover:text-gold dark:border-foreground dark:hover:border-gold"
         >
           <Link href="#servicos">
             Ver serviços
@@ -191,14 +193,13 @@ export default function Hero() {
           }}
           className="
             relative
-            hidden
-            md:block
+            block
           "
         >
 
           <motion.div
             whileHover={{
-              scale:1.03
+              scale:1.12
             }}
             transition={{
               duration:.4

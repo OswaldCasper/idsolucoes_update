@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
+import Logo from "@/components/Logo";
 import DeskNav from "@/components/DeskNav";
 import MobNav from "@/components/MobNav";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -28,8 +28,8 @@ export default function NewHeader() {
           <Image
             src="/logoIDS-white.png"
             alt="IDS Soluções"
-            width={180}
-            height={60}
+            width={190}
+            height={70}
             priority
             className="hidden h-10 w-auto dark:block"
           />
