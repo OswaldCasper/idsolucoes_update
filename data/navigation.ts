@@ -14,22 +14,22 @@ const menu: MenuItem[] = [
       {
         id: 21,
         title: "Quem Somos",
-        href: "/brevemente",
+        href: "/sobre/quem-somos",
       },
       {
         id: 22,
         title: "Organigrama",
-        href: "/brevemente",
+        href: "/sobre/organigrama",
       },
       {
         id: 23,
         title: "Certificações",
-        href: "/brevemente",
+        href: "/sobre/certificacoes",
       },
       {
         id: 24,
         title: "Parceiros",
-        href: "/brevemente",
+        href: "/sobre/parceiros",
       },
     ],
   },
