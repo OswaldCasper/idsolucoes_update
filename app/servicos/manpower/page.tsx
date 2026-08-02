@@ -1,242 +1,335 @@
+"use client";
+
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
+import {
+  Users,
+  Zap,
+  RefreshCw,
+  UserPlus,
+  Search,
+  GraduationCap,
+  ClipboardCheck,
+  FileText,
+  Banknote,
+  ShieldCheck,
+  Shuffle,
+  Target,
+} from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 import RelatedServices from "@/components/RelatedServices";
 
+const scope = [
+  {
+    icon: Users,
+    text: "Cedência de profissionais para funções operacionais, técnicas e de apoio.",
+  },
+  {
+    icon: Zap,
+    text: "Reforço de equipas em períodos de maior procura ou em projectos pontuais.",
+  },
+  {
+    icon: RefreshCw,
+    text: "Equipas fixas, para criar rotinas consolidadas, ou rotativas, para maior flexibilidade.",
+  },
+  {
+    icon: UserPlus,
+    text: "Substituição imediata em caso de ausência do colaborador alocado.",
+  },
+];
+
+const process = [
+  {
+    icon: Search,
+    title: "Recrutamento e selecção",
+    text: "Avaliação técnica e comportamental dos perfis e verificação documental rigorosa antes de qualquer alocação.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Formação",
+    text: "Capacitação inicial e contínua dos colaboradores ao longo do contrato.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Supervisão operacional",
+    text: "Acompanhamento no terreno, controlo de qualidade e reporte periódico ao cliente.",
+  },
+  {
+    icon: FileText,
+    title: "Gestão administrativa",
+    text: "Processamento salarial, gestão de assiduidade e cumprimento integral das obrigações laborais vigentes em Angola.",
+  },
+];
+
+const benefits = [
+  {
+    icon: Banknote,
+    text: "Conversão de custos variáveis de pessoal em custos previsíveis e controlados.",
+  },
+  {
+    icon: ShieldCheck,
+    text: "Mitigação de riscos laborais e de exposição jurídica e administrativa.",
+  },
+  {
+    icon: Shuffle,
+    text: "Flexibilidade para aumentar ou reduzir equipas sem peso burocrático.",
+  },
+  {
+    icon: Target,
+    text: "Maior foco da empresa cliente no seu negócio principal.",
+  },
+];
+
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export default function ManpowerPage() {
-  const scope = [
-    "Profissionais para funções operacionais, técnicas e administrativas",
-    "Reforço de equipas em picos de trabalho ou projectos temporários",
-    "Equipas fixas ou rotativas conforme necessidade do cliente",
-    "Substituição rápida em caso de ausência",
-  ];
-
-  const process = [
-    "Recrutamento e selecção rigorosa de candidatos",
-    "Avaliação técnica e comportamental",
-    "Formação inicial e contínua dos colaboradores",
-    "Gestão administrativa completa (contratos, salários, assiduidade)",
-    "Supervisão e acompanhamento no terreno",
-    "Relatórios periódicos ao cliente",
-  ];
-
-  const benefits = [
-    "Redução de custos fixos com pessoal",
-    "Eliminação de encargos administrativos e legais",
-    "Flexibilidade total na gestão de equipas",
-    "Substituição rápida de colaboradores",
-    "Maior foco no core business da empresa",
-    "Gestão profissional de recursos humanos",
-  ];
-
   return (
-    <main>
-
-      {/* HERO */}
-      <section className="is-dark relative overflow-hidden bg-black py-24 text-white md:py-28">
-        <div className="pointer-events-none absolute -right-56 -top-40 h-[760px] w-[760px] rounded-full bg-[radial-gradient(circle,rgba(201,154,58,0.10)_0%,transparent_62%)]" />
-
-        <div className="relative z-10 mx-auto max-w-[1240px] px-8">
-          <span className="eyebrow mb-6">Serviços IDS</span>
-
-          <h1 className="font-display text-[clamp(42px,5vw,72px)] font-medium leading-[1.05]">
-            Manpower
-            <span className="gold-text block">
-              Cedência de Mão de Obra
-            </span>
-          </h1>
-
-          <p className="mt-8 max-w-[750px] text-[18px] text-muteddark">
-            Soluções completas de outsourcing de recursos humanos, garantindo
-            profissionais qualificados, gestão operacional e redução de custos
-            para empresas que precisam de flexibilidade e eficiência.
-          </p>
-        </div>
-      </section>
+    <main className="bg-background text-foreground">
+      <PageHeader
+        eyebrow="Serviços IDS"
+        title="Manpower"
+        titleAccent="Cedência de Mão de Obra"
+        description="Soluções completas de outsourcing de recursos humanos, garantindo profissionais qualificados, gestão operacional e redução de custos para empresas que precisam de flexibilidade e eficiência."
+        image="/Image_8.jpeg"
+        imageAlt="Manpower — cedência de mão de obra"
+      />
 
       {/* INTRO */}
-      <section className="bg-paper py-24">
-        <div className="mx-auto max-w-[1240px] px-8">
-
-          <span className="eyebrow mb-6">O Serviço</span>
-
-          <h2 className="font-display text-[clamp(32px,4vw,52px)] font-medium leading-[1.1]">
-            Gestão de pessoas
-            <span className="gold-text block">
-              com eficiência e rigor
+      <section className="bg-card/40 py-20 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <span className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-foreground dark:text-gold">
+              <span className="h-px w-7 bg-primary dark:bg-gold" />
+              O Serviço
             </span>
-          </h2>
 
-          <p className="mt-8 max-w-[850px] text-[17px] leading-relaxed text-muted">
-            O serviço de Manpower da IDS consiste na disponibilização de profissionais qualificados, em
-            regime de outsourcing, para apoiar operações, projectos e picos de actividade dos nossos
-            clientes. Assumimos integralmente a selecção, a formação, a supervisão e a gestão
-            administrativa dos colaboradores alocados, libertando a empresa cliente dos encargos e riscos
-            associados à gestão directa de pessoal.
-          </p>
+            <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-semibold leading-[1.1] tracking-tight">
+              Gestão de pessoas
+              <span className="gold-text block">com eficiência e rigor</span>
+            </h2>
 
-          <h5 className="mt-5 text-[17px] font-bold leading-relaxed text-muted">
-            Âmbito do Servico:
-          </h5>
-          <ul className="mt-3 list-inside list-disc text-[17px] leading-relaxed text-muted">
-            <li>Cedência de profissionais para funções operacionais, técnicas e de apoio.</li>
-            <li>Reforço de equipas em períodos de maior procura ou em projectos pontuais.</li>
-            <li>Equipas fixas, para criar rotinas consolidadas, ou rotativas, para maior flexibilidade.</li>
-            <li>Substituição imediata em caso de ausência do colaborador alocado.</li>          
-          </ul>
+            <p className="mt-8 max-w-[850px] text-[17px] leading-relaxed text-muted-foreground">
+              O serviço de Manpower da IDS consiste na disponibilização de
+              profissionais qualificados, em regime de outsourcing, para
+              apoiar operações, projectos e picos de actividade dos nossos
+              clientes. Assumimos integralmente a selecção, a formação, a
+              supervisão e a gestão administrativa dos colaboradores
+              alocados, libertando a empresa cliente dos encargos e riscos
+              associados à gestão directa de pessoal.
+            </p>
 
-          <h5 className="mt-5 text-[17px] font-bold leading-relaxed text-muted">
-            O Nosso Modelo Operacional:
-          </h5>
-          <ul className="mt-3 list-inside list-disc text-[17px] leading-relaxed text-muted">
-            <li><span className="font-bold">Recrutamento e selecção:</span> avaliação técnica e comportamental dos perfis e verificação
-                documental rigorosa antes de qualquer alocação</li>
-            <li><span className="font-bold">Formação:</span> capacitação inicial e contínua dos colaboradores ao longo do contrato.</li>
-            <li><span className="font-bold">Supervisão operacional:</span> acompanhamento no terreno, controlo de qualidade e reporte periódico ao cliente.</li>
-            <li><span className="font-bold">Gestão administrativa:</span> processamento salarial, gestão de assiduidade e cumprimento integral das obrigações laborais vigentes em Angola.</li>
-          </ul>
+            {/* APLICAÇÃO PRÁTICA */}
+            <div className="mt-14 max-w-[950px] rounded-xl border-l-4 border-gold bg-card p-8 shadow-sm">
+              <h3 className="font-sans text-[22px] font-semibold text-foreground">
+                Aplicação Prática
+              </h3>
 
-          <h5 className="mt-5 text-[17px] font-bold leading-relaxed text-muted">
-            Benefícios para o Cliente:
-          </h5>
-          <ul className="mt-3 list-inside list-disc text-[17px] leading-relaxed text-muted">
-            <li>Conversão de custos variáveis de pessoal em custos previsíveis e controlados.</li>
-            <li>Mitigação de riscos laborais e de exposição jurídica e administrativa.</li>
-            <li>Flexibilidade para aumentar ou reduzir equipas sem peso burocrático.</li>
-            <li>Maior foco da empresa cliente no seu negócio principal.</li>          
-          </ul>
-
-          {/* Bloco de destaque */}
-          <div className="mt-14 border-l-4 border-gold pl-8 max-w-[950px]">
-
-          <h3 className="font-display text-[24px] font-medium text-ink">
-            Aplicação Prática
-          </h3>
-
-          <p className="mt-5 text-[17px] leading-relaxed text-muted">
-            O modelo de Manpower é particularmente vantajoso para funções de apoio recorrente — como limpeza, serviços gerais ou operações
-            <span className="font-semibold text-ink">
-              {" "}em que a IDS assume toda a gestão da equipa e garante continuidade e conformidade do serviço.
-            </span>
-          </p>
-          </div>      
+              <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground">
+                O modelo de Manpower é particularmente vantajoso para funções
+                de apoio recorrente — como limpeza, serviços gerais ou
+                operações —{" "}
+                <span className="font-semibold text-foreground">
+                  em que a IDS assume toda a gestão da equipa e garante
+                  continuidade e conformidade do serviço.
+                </span>
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ÂMBITO */}
-      <section className="bg-black py-24 text-white">
-        <div className="mx-auto max-w-[1240px] px-8">
-
-          <span className="eyebrow mb-6">Âmbito do Serviço</span>
-
-          <h2 className="font-display text-[clamp(32px,4vw,52px)] font-medium">
-            Soluções flexíveis para
-            <span className="gold-text block">
-              diferentes necessidades
+      <section className="bg-background py-20 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <span className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-foreground dark:text-gold">
+              <span className="h-px w-7 bg-primary dark:bg-gold" />
+              Âmbito do Serviço
             </span>
-          </h2>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {scope.map((item) => (
-              <div
-                key={item}
-                className="group border border-linedark bg-nearblack p-6"
+            <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-semibold leading-[1.1] tracking-tight">
+              Soluções flexíveis para
+              <span className="gold-text block">diferentes necessidades</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={container}
+            className="mt-14 grid gap-6 md:grid-cols-2"
+          >
+            {scope.map(({ icon: Icon, text }) => (
+              <motion.div
+                key={text}
+                variants={item}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-start gap-4 rounded-xl border border-border bg-card p-6 shadow-sm transition-colors duration-300 hover:border-gold/50"
               >
-                <div className="mb-4 h-[2px] w-10 bg-gold transition-all duration-300 group-hover:w-20" />
-
-                <p className="text-[15px] text-white group-hover:text-gold transition-colors">
-                  {item}
-                </p>
-              </div>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.75} />
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{text}</p>
+              </motion.div>
             ))}
-          </div>
-
+          </motion.div>
         </div>
       </section>
 
-      {/* PROCESSO */}
-      <section className="bg-paper py-24">
-        <div className="mx-auto max-w-[1240px] px-8">
-
-          <span className="eyebrow mb-6">O nosso modelo</span>
-
-          <h2 className="font-display text-[clamp(32px,4vw,52px)] font-medium">
-            Processo estruturado
-            <span className="gold-text block">
-              e profissional
+      {/* PROCESSO / MODELO OPERACIONAL */}
+      <section className="bg-card/40 py-20 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <span className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-foreground dark:text-gold">
+              <span className="h-px w-7 bg-primary dark:bg-gold" />
+              O Nosso Modelo
             </span>
-          </h2>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {process.map((item) => (
-              <div
-                key={item}
-                className="border border-line bg-white p-6"
+            <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-semibold leading-[1.1] tracking-tight">
+              Processo estruturado
+              <span className="gold-text block">e profissional</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={container}
+            className="mt-14 grid gap-6 md:grid-cols-2"
+          >
+            {process.map(({ icon: Icon, title, text }) => (
+              <motion.div
+                key={title}
+                variants={item}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
+                className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-sm transition-colors duration-300 hover:border-gold/50"
               >
-                {item}
-              </div>
-            ))}
-          </div>
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[image:var(--gold-grad)] transition-all duration-500 group-hover:w-full" />
 
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 4 }}
+                  transition={{ duration: 0.3 }}
+                  className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-gold/30 bg-gold/10 text-foreground dark:text-gold"
+                >
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </motion.div>
+
+                <h3 className="mb-2 font-sans text-[16.5px] font-semibold">{title}</h3>
+                <p className="text-[14.5px] leading-relaxed text-muted-foreground">{text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* BENEFÍCIOS */}
-      <section className="bg-black py-24 text-white">
-        <div className="mx-auto max-w-[1240px] px-8">
-
-          <span className="eyebrow mb-6">Vantagens</span>
-
-          <h2 className="font-display text-[clamp(32px,4vw,52px)] font-medium">
-            Porque escolher
-            <span className="gold-text block">
-              a IDS
+      <section className="bg-background py-20 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-[1240px] px-6 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <span className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-foreground dark:text-gold">
+              <span className="h-px w-7 bg-primary dark:bg-gold" />
+              Vantagens
             </span>
-          </h2>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {benefits.map((item) => (
-              <div className="border border-linedark bg-nearblack p-6">
-                {item}
-              </div>
+            <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-semibold leading-[1.1] tracking-tight">
+              Porque escolher
+              <span className="gold-text block">a IDS</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={container}
+            className="mt-14 grid gap-6 md:grid-cols-2"
+          >
+            {benefits.map(({ icon: Icon, text }) => (
+              <motion.div
+                key={text}
+                variants={item}
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-start gap-4 rounded-xl border border-border bg-card p-6 shadow-sm transition-colors duration-300 hover:border-gold/50"
+              >
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.75} />
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{text}</p>
+              </motion.div>
             ))}
-          </div>
-
+          </motion.div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-black py-24 text-white">
-        <div className="mx-auto max-w-[900px] px-8 text-center">
-
-          <h2 className="font-display text-[clamp(34px,4vw,54px)] font-medium">
+      <section className="bg-card/40 py-20 transition-colors duration-300 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mx-auto max-w-[900px] px-6 text-center md:px-8"
+        >
+          <h2 className="font-sans text-[clamp(34px,4vw,54px)] font-semibold leading-[1.1] tracking-tight">
             Precisa de reforço na sua
-            <span className="gold-text block">
-              equipa?
-            </span>
+            <span className="gold-text block">equipa?</span>
           </h2>
 
-          <p className="mt-6 text-muted">
-            Fale connosco e receba uma solução de manpower adaptada à sua empresa.
+          <p className="mt-6 text-muted-foreground">
+            Fale connosco e receba uma solução de manpower adaptada à sua
+            empresa.
           </p>
 
           <div className="mt-10">
-            <Link href="/#contactos" className="btn btn-fill">
-              Solicitar Proposta
-            </Link>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <Link href="/#contactos" className="btn btn-fill group relative">
+                Solicitar Proposta
+                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[image:var(--gold-grad)] transition-all duration-500 group-hover:w-full" />
+              </Link>
+            </motion.div>
           </div>
-
-        </div>
+        </motion.div>
       </section>
-      <RelatedServices
-              links={[
-                { title: "Suporte Técnico Especializado", href: "/servicos/suporte-tecnico" },
-                { title: "Formação Profissional", href: "/servicos/formacao-profissional" },
-                { title: "Segurança Electrónica", href: "/servicos/seguranca-electronica" },
-                { title: "AVAC - Manutenção em Sistemas de Frio", href: "/servicos/avac" },
-                { title: "Manutenção de Interiores - Estofos", href: "/servicos/estofos" },
-                { title: "Recrutamento e Selecção", href: "/servicos/recrutamento-seleccao" },
-              ]}
-            />
 
+      <RelatedServices
+        links={[
+          { title: "Suporte Técnico Especializado", href: "/servicos/suporte-tecnico" },
+          { title: "Formação Profissional", href: "/servicos/formacao-profissional" },
+          { title: "Segurança Electrónica", href: "/servicos/seguranca-electronica" },
+          { title: "AVAC - Manutenção em Sistemas de Frio", href: "/servicos/avac" },
+          { title: "Manutenção de Interiores - Estofos", href: "/servicos/estofos" },
+          { title: "Recrutamento e Selecção", href: "/servicos/recrutamento-seleccao" },
+        ]}
+      />
     </main>
   );
 }

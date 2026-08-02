@@ -5,89 +5,94 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 
-// ---------- DADOS (fictícios, ajustar depois) ----------
+// ---------- DADOS (estrutura real, extraída do organigrama enviado) ----------
 
-interface OrgMember {
-  name: string;
-  role: string;
+interface OrgGroup {
+  title: string;
+  items: string[];
 }
 
 interface OrgNode {
   id: string;
   title: string;
-  subtitle?: string;
-  member?: OrgMember;
-  description?: string;
+  functions?: string[];
+  groups?: OrgGroup[];
 }
 
-const assembleiaGeral: OrgNode = {
-  id: "assembleia-geral",
-  title: "Assembleia Geral",
-  subtitle: "Órgão máximo de decisão",
+const directorGeral: OrgNode = {
+  id: "director-geral",
+  title: "Director-Geral (CEO)",
 };
 
-const conselhoFiscal: OrgNode = {
-  id: "conselho-fiscal",
-  title: "Conselho Fiscal",
-  subtitle: "Órgão de fiscalização",
-  description:
-    "Verifica e valida de forma independente as contas da empresa todos os anos.",
-};
+const gabineteApoio: OrgNode[] = [
+  { id: "assessoria-juridica", title: "Assessoria Jurídica" },
+  { id: "auditoria-interna", title: "Auditoria Interna" },
+  { id: "planeamento-estrategico", title: "Planeamento Estratégico" },
+  { id: "comunicacao-marketing", title: "Comunicação e Marketing" },
+];
 
-const conselhoAdministracao: OrgNode = {
-  id: "conselho-administracao",
-  title: "Conselho de Administração",
-  subtitle: "Órgão executivo",
-};
-
-const administracaoGeral: OrgNode = {
-  id: "administracao-geral",
-  title: "Administração Geral",
-  member: { name: "Nome Fictício", role: "Administrador Geral" },
-  description:
-    "Coordena as seis direcções operacionais e reporta directamente ao Conselho de Administração.",
-};
-
-const departamentos: OrgNode[] = [
+const direcoes: OrgNode[] = [
   {
-    id: "seguranca-electronica",
-    title: "Direcção de Segurança Electrónica",
-    member: { name: "Nome Fictício", role: "Director" },
-    description:
-      "Projecto, instalação e manutenção de sistemas de segurança electrónica.",
-  },
-  {
-    id: "manpower-recrutamento",
-    title: "Direcção de Manpower & Recrutamento",
-    member: { name: "Nome Fictício", role: "Directora" },
-    description:
-      "Cedência de mão-de-obra e recrutamento e selecção de perfis.",
-  },
-  {
-    id: "formacao-profissional",
-    title: "Direcção de Formação Profissional",
-    member: { name: "Nome Fictício", role: "Director" },
-    description:
-      "Programas de capacitação técnica e comportamental certificados pelo INEFOP.",
-  },
-  {
-    id: "direccao-tecnica",
-    title: "Direcção Técnica",
-    member: { name: "Nome Fictício", role: "Director" },
-    description:
-      "AVAC, suporte técnico especializado e manutenção de interiores de viaturas.",
-  },
-  {
-    id: "administrativa-financeira",
-    title: "Direcção Administrativa e Financeira",
-    member: { name: "Nome Fictício", role: "Directora" },
-    description: "Gestão financeira, contabilística e administrativa da empresa.",
+    id: "adm-financeira",
+    title: "Dir. Adm. e Financeira",
+    functions: ["Contabilidade", "Tesouraria", "Compras", "Património", "Logística"],
   },
   {
     id: "recursos-humanos",
-    title: "Direcção de Recursos Humanos",
-    member: { name: "Nome Fictício", role: "Director" },
-    description: "Gestão de talento, formação interna e bem-estar dos colaboradores.",
+    title: "Dir. Recursos Humanos",
+    functions: [
+      "Recrutamento e Selecção",
+      "Cedência de Mão de Obra",
+      "Administração de Pessoal",
+      "Desenvolvimento e Formação",
+    ],
+  },
+  {
+    id: "comercial",
+    title: "Dir. Comercial",
+    functions: [
+      "Vendas",
+      "Atendimento ao Cliente",
+      "Gestão de Contratos",
+      "Desenvolvimento de Negócios",
+    ],
+  },
+  {
+    id: "operacoes",
+    title: "Dir. Operações",
+    groups: [
+      {
+        title: "Dept. Segurança Electrónica",
+        items: ["Instalação", "Manutenção", "Monitorização", "Suporte Técnico"],
+      },
+      {
+        title: "Dept. Manutenção Técnica",
+        items: ["Equipamentos Eléctricos", "Equipamentos Electrónicos", "Infra-estruturas"],
+      },
+      {
+        title: "Dept. Formação Profissional",
+        items: [
+          "Coordenação Pedagógica",
+          "Desenvolvimento Curricular",
+          "Gestão de Formadores",
+          "Certificação",
+        ],
+      },
+      {
+        title: "Dept. Suporte Especializado",
+        items: ["Assistência Técnica", "Help Desk", "Consultoria Técnica", "Suporte Técnico"],
+      },
+    ],
+  },
+  {
+    id: "tecnologia",
+    title: "Dir. Tecnologia (TI)",
+    functions: ["Infra-estrutura", "Sistemas", "Redes", "Cibersegurança"],
+  },
+  {
+    id: "qsa",
+    title: "Dir. Qualidade e Segurança (QSA)",
+    functions: ["Qualidade", "Saúde e Segurança no Trabalho", "Ambiente", "Gestão de Riscos"],
   },
 ];
 
@@ -101,18 +106,16 @@ const cardVariants: Variants = {
 function OrgNodeCard({
   node,
   variant = "secondary",
-  expandable = false,
 }: {
   node: OrgNode;
-  variant?: "primary" | "secondary" | "advisory";
-  expandable?: boolean;
+  variant?: "primary" | "secondary";
 }) {
   const [open, setOpen] = useState(false);
+  const expandable = Boolean(node.functions || node.groups);
 
   const styles: Record<string, string> = {
-    primary: "border-gold/40 bg-card",
+    primary: "border-gold/50 bg-card",
     secondary: "border-border bg-card",
-    advisory: "border-dashed border-border bg-card/60",
   };
 
   return (
@@ -125,28 +128,20 @@ function OrgNodeCard({
       transition={{ duration: 0.3 }}
       onClick={() => expandable && setOpen((v) => !v)}
       className={`
-        relative inline-block w-[210px] rounded-xl border p-4 text-left shadow-sm
+        relative inline-block w-[200px] rounded-xl border p-4 text-left shadow-sm
         transition-colors duration-300 hover:border-gold/50
         ${styles[variant]}
+        ${variant === "primary" ? "w-[240px] py-5" : ""}
         ${expandable ? "cursor-pointer" : ""}
       `}
     >
-      <h3 className="text-[13.5px] font-semibold leading-snug text-foreground">
+      <h3
+        className={`font-semibold leading-snug text-foreground ${
+          variant === "primary" ? "text-[15px]" : "text-[13px]"
+        }`}
+      >
         {node.title}
       </h3>
-
-      {node.subtitle && (
-        <p className="mt-1 text-[12px] text-muted-foreground">{node.subtitle}</p>
-      )}
-
-      {node.member && (
-        <p className="mt-2 text-[12.5px] font-medium text-foreground dark:text-gold">
-          {node.member.name}
-          <span className="block text-[11.5px] font-normal text-muted-foreground">
-            {node.member.role}
-          </span>
-        </p>
-      )}
 
       {expandable && (
         <button
@@ -159,23 +154,43 @@ function OrgNodeCard({
       )}
 
       <AnimatePresence>
-        {open && node.description && (
-          <motion.p
+        {open && (
+          <motion.div
             initial={{ opacity: 0, height: 0, marginTop: 0 }}
             animate={{ opacity: 1, height: "auto", marginTop: 10 }}
             exit={{ opacity: 0, height: 0, marginTop: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="overflow-hidden text-[12px] leading-relaxed text-muted-foreground"
           >
-            {node.description}
-          </motion.p>
+            {node.functions && (
+              <ul className="space-y-1.5">
+                {node.functions.map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {node.groups && (
+              <div className="space-y-3">
+                {node.groups.map((g) => (
+                  <div key={g.title}>
+                    <p className="text-[11.5px] font-semibold text-foreground">{g.title}</p>
+                    <p className="mt-0.5">{g.items.join(", ")}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>
   );
 }
 
-// ---------- LINHAS DE LIGAÇÃO (CSS puro via Tailwind before/after) ----------
+// ---------- LINHA DE LIGAÇÃO HORIZONTAL (CSS puro via Tailwind before/after) ----------
 
 const branch = `
   relative pt-6
@@ -183,7 +198,6 @@ const branch = `
   after:absolute after:top-0 after:left-1/2 after:h-6 after:w-1/2 after:border-l after:border-border after:content-['']
   first:before:border-none
   last:after:border-none
-  only:before:hidden only:after:hidden
 `;
 
 const stem =
@@ -198,7 +212,7 @@ export default function OrganigramaPage() {
         eyebrow="Sobre a IDS"
         title="Estrutura"
         titleAccent="Organizacional"
-        description="Conheça os órgãos de governação e as direcções que sustentam a operação da IDS."
+        description="Conheça a estrutura funcional e hierárquica que sustenta a operação da IDS."
         image="/Image_3.jpeg"
         imageAlt="Estrutura organizacional da IDS"
       />
@@ -213,11 +227,11 @@ export default function OrganigramaPage() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-[16.5px] leading-relaxed text-muted-foreground"
           >
-            A IDS é composta pela Assembleia Geral, órgão máximo de decisão,
-            coadjuvado pelo Conselho Fiscal — responsável pela fiscalização
-            independente das contas — e pelo Conselho de Administração, que
-            superintende a Administração Geral e as seis direcções
-            operacionais da empresa.
+            A estrutura da IDS é liderada pela Direcção-Geral, apoiada por um
+            Gabinete de Apoio à Direcção com funções de assessoria jurídica,
+            auditoria interna, planeamento estratégico e comunicação. A
+            operação assenta em seis direcções funcionais, cada uma
+            responsável por uma área específica da actividade da empresa.
           </motion.p>
         </div>
       </section>
@@ -226,45 +240,43 @@ export default function OrganigramaPage() {
       <section className="bg-background pb-20 text-foreground transition-colors duration-300 md:pb-24">
         <div className="mx-auto max-w-[1240px] px-6 lg:px-8">
           <div className="overflow-x-auto py-4">
-            <div className="flex min-w-max justify-center">
-              <ul className="flex flex-col items-center text-center">
-                <li>
-                  <OrgNodeCard node={assembleiaGeral} variant="primary" />
+            <div className="flex min-w-max flex-col items-center">
+              {/* CEO */}
+              <OrgNodeCard node={directorGeral} variant="primary" />
 
-                  <ul className={`mt-0 flex justify-center ${stem}`}>
-                    <li className={branch}>
-                      <OrgNodeCard node={conselhoFiscal} variant="advisory" expandable />
-                    </li>
-
-                    <li className={branch}>
-                      <OrgNodeCard node={conselhoAdministracao} variant="secondary" />
-
-                      <ul className={`mt-0 flex justify-center ${stem}`}>
-                        <li className="relative pt-6 only:before:hidden only:after:hidden">
-                          <OrgNodeCard
-                            node={administracaoGeral}
-                            variant="primary"
-                            expandable
-                          />
-
-                          <ul className={`mt-0 flex justify-center gap-3 ${stem}`}>
-                            {departamentos.map((dept) => (
-                              <li key={dept.id} className={branch}>
-                                <OrgNodeCard node={dept} variant="secondary" expandable />
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
+              {/* ROW 1 — GABINETE DE APOIO */}
+              <ul className={`mt-0 flex justify-center gap-3 ${stem}`}>
+                {gabineteApoio.map((item) => (
+                  <li key={item.id} className={branch}>
+                    <OrgNodeCard node={item} variant="secondary" />
+                  </li>
+                ))}
               </ul>
+
+              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                Gabinete de Apoio à Direcção
+              </p>
+
+              {/* conector entre as duas fiadas */}
+              <div className="h-6 w-px bg-border" />
+
+              {/* ROW 2 — DIRECÇÕES FUNCIONAIS */}
+              <ul className={`mt-0 flex justify-center gap-3 ${stem}`}>
+                {direcoes.map((dir) => (
+                  <li key={dir.id} className={branch}>
+                    <OrgNodeCard node={dir} variant="secondary" />
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                Direcções Funcionais
+              </p>
             </div>
           </div>
 
-          <p className="mt-8 text-center text-[13px] text-muted-foreground">
-            Toque num cargo para ver mais detalhes.
+          <p className="mt-10 text-center text-[13px] text-muted-foreground">
+            Toque numa direcção funcional para ver as áreas que a compõem.
           </p>
         </div>
       </section>

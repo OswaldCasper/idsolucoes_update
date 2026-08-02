@@ -5,10 +5,10 @@ import { motion, useInView, useMotionValue, useTransform, animate, type Variants
 
 // TODO: substituir por números reais
 const stats = [
-  { value: 10, suffix: "+", label: "Anos de experiência" },
-  { value: 500, suffix: "+", label: "Clientes atendidos" },
+  { value: 5, suffix: "+", label: "Anos de experiência" },
+  { value: 300, suffix: "+", label: "Clientes atendidos" },
   { value: 150, suffix: "+", label: "Profissionais qualificados" },
-  { value: 300, suffix: "+", label: "Projectos concluídos" },
+  { value: 200, suffix: "+", label: "Projectos concluídos" },
 ];
 
 const container: Variants = {

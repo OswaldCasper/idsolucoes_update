@@ -13,7 +13,7 @@ export default function QuemSomosPage() {
         title="Quem"
         titleAccent="Somos"
         description="Serviços que capacitam, conectam e desenvolvem — conheça a empresa por trás das soluções."
-        image="/Image_2.jpeg"
+        image="/Image_9.jpeg"
         imageAlt="Equipa Império Dourado Soluções"
       />
       <QuemSomosIntro />

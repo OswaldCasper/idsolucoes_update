@@ -137,7 +137,7 @@ export default function Hero() {
             animate={{opacity:1}}
             transition={{delay:.65}}
           >
-            Empresa angolana de serviços estratégicos.
+            Empresa angolana de prestação de serviços estratégicos.
             Combinamos tecnologia, equipas qualificadas e uma
             abordagem centrada nas pessoas para entregar soluções
             práticas a cada cliente.

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { Quote } from "lucide-react";
 
 const whyIds = [
   {
@@ -102,42 +103,54 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* IMAGEM + CONTEÚDO */}
+        {/* MENSAGEM DO PRESIDENTE + CONTEÚDO */}
         <div className="grid items-start gap-16 lg:grid-cols-[0.9fr_1.1fr]">
 
-          {/* IMAGEM */}
+          {/* MENSAGEM DO PRESIDENTE */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, x: -40 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="relative"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ y: -4 }}
               transition={{ duration: 0.4 }}
-              className="relative overflow-hidden rounded-2xl border border-border shadow-xl"
+              className="relative overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-xl md:p-10"
             >
-              <img
-                src="/ribas.jpg"
-                alt="Império Dourado Soluções"
-                className="
-                  h-[420px]
-                  w-full
-                  object-cover
-                  object-center
-                  sm:h-[520px]
-                  lg:h-[650px]
-                "
-              />
+              {/* linha dourada vertical */}
+              <div className="absolute left-0 top-0 h-full w-1 bg-[image:var(--gold-grad)]" />
 
+              <Quote className="mb-6 h-9 w-9 text-gold/30" strokeWidth={1.5} />
+
+              <p className="font-sans text-[18.5px] italic leading-relaxed text-foreground md:text-[20px]">
+                Acreditamos que o verdadeiro desenvolvimento de Angola passa
+                por investir nas pessoas. Cada solução que entregamos carrega
+                o nosso compromisso de capacitar, proteger e transformar, não
+                só empresas, mas também as comunidades em que actuamos.
+              </p>
+
+              <div className="mt-8 flex items-center gap-4">
+                <div className="h-px w-10 shrink-0 bg-gold" />
+                <div>
+                  <p className="font-sans text-[15px] font-semibold text-foreground">
+                    Ribas Contreiras
+                  </p>
+                  <p className="text-[13px] text-muted-foreground">
+                    Presidente da IDS — Império Dourado Soluções
+                  </p>
+                </div>
+              </div>
+
+              {/* overlay dourado subtil */}
               <div
                 className="
                   pointer-events-none
                   absolute
                   inset-0
                   bg-gradient-to-tr
-                  from-gold/20
+                  from-gold/5
                   via-transparent
                   to-transparent
                 "
