@@ -231,7 +231,7 @@ export default function OrganigramaPage() {
             Gabinete de Apoio à Direcção com funções de assessoria jurídica,
             auditoria interna, planeamento estratégico e comunicação. A
             operação assenta em seis direcções funcionais, cada uma
-            responsável por uma área específica da actividade da empresa.
+            responsável por uma área especifica da actividade da empresa.
           </motion.p>
         </div>
       </section>
